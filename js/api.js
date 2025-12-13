@@ -2,7 +2,7 @@
 const API_CONFIG = {
     // Base URL for your backend API (Express server in /backend)
     // For local development the server runs on port 5000 by default.
-    BASE_URL: 'http://localhost:5000/api',
+    BASE_URL: 'https://web-tech-project-backend-acity-eats.onrender.com/api',
     TIMEOUT: 10000
 };
 
