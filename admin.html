@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ACITY EATS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="admin-header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div class="logo" style="color: white;">
+                        <img src="images/Academic-City.png" alt="Academic City University Logo" class="acity-logo">
+                        ACITY EATS - Admin
+                    </div>
+                    <div style="font-size: 14px; opacity: 0.9; margin-top: 5px;">Manage orders and menu</div>
+                </div>
+                <div class="header-icons">
+                    <button class="icon-btn" style="color: white;" onclick="refreshOrders()">Refresh</button>
+                    <button class="icon-btn" style="color: white;" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalOrders">0</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="pendingOrders">0</div>
+                <div class="stat-label">Pending Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalRevenue">GHS 0</div>
+                <div class="stat-label">Total Revenue</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="inhouseOrders">0</div>
+                <div class="stat-label">Inhouse Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="takeoutOrders">0</div>
+                <div class="stat-label">Takeout Orders</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div style="padding: 30px;">
+            <!-- Orders Management -->
+            <div style="margin-bottom: 40px;">
+                <div class="section-header">
+                    <h2 class="section-title">Order Management</h2>
+                </div>
+                <!-- Order Type Filters -->
+                <div id="adminOrderFilters" style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <button class="tab active" onclick="filterAdminOrders('All', event)">All Orders</button>
+                    <button class="tab" onclick="filterAdminOrders('Inhouse', event)">Inhouse</button>
+                    <button class="tab" onclick="filterAdminOrders('Takeout', event)">Takeout</button>
+                </div>
+                <div id="adminOrdersContainer">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Menu Management -->
+            <div id="menuManagement">
+                <!-- Menu management will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Item Modal -->
+    <div id="menuItemModal" class="modal">
+        <div class="modal-content" id="menuItemForm">
+            <!-- Form will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

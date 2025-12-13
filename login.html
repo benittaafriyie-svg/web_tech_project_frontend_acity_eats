@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ACITY EATS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+    <div class="form-container">
+        <div class="auth-logo-wrapper">
+            <img src="images/Academic-City.png" alt="Academic City University Logo" class="auth-logo">
+        </div>
+        <h1 class="form-title">Sign in to ACITY EATS</h1>
+        <p style="text-align: center; color: #cccccc; margin-bottom: 20px; font-size: 14px;">
+            Use the campus account you registered with to access your meal orders.
+        </p>
+        <p style="text-align: center; color: #999999; margin-bottom: 30px; font-size: 13px;">
+            Your profile includes <strong>name</strong>, <strong>email</strong> and <strong>room number</strong> so deliveries can find you.
+        </p>
+        
+        <form onsubmit="login(event)">
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    class="form-input" 
+                    placeholder="your.email@university.edu"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    class="form-input" 
+                    placeholder="Enter your password"
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="form-btn">Sign In</button>
+        </form>
+        
+        <div class="form-link">
+            Don't have an account? <a href="register.html">Sign Up</a>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+</body>
+</html>

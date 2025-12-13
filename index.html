@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACITY EATS - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="images/Academic-City.png" alt="Academic City University Logo" class="acity-logo">
+                ACITY EATS
+            </div>
+            <div class="header-icons">
+                <button class="icon-btn">Notifications</button>
+                <button class="icon-btn" onclick="window.location.href='orders.html'">My Orders</button>
+                <span id="userName" style="margin-left: 10px; font-weight: 600;"></span>
+                <button class="icon-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab active" onclick="setOrderType('Inhouse', event)">Inhouse Order</button>
+            <button class="tab" onclick="setOrderType('Delivery', event)">Delivery Order</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Side - Menu -->
+            <div>
+                <!-- Promo Banner -->
+                <div class="promo-banner">
+                    <div class="promo-tag">Special</div>
+                    <div class="promo-title">Breakfast Offer</div>
+                    <div class="promo-discount">Upto 15% discount</div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="category-filter">
+                    <div class="category-item active" onclick="filterByCategory('All', event)">
+                        <div class="category-icon">🍽️</div>
+                        <div class="category-name">All</div>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('Meals', event)">
+                        <div class="category-icon">🍛</div>
+                        <div class="category-name">Meals</div>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('Drinks', event)">
+                        <div class="category-icon">🥤</div>
+                        <div class="category-name">Drinks</div>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('Snacks', event)">
+                        <div class="category-icon">🍟</div>
+                        <div class="category-name">Snacks</div>
+                    </div>
+                </div>
+
+                <!-- Today's Special -->
+                <div class="section-header">
+                    <h2 class="section-title">Today's special</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <div id="menuGrid" class="menu-grid">
+                    <!-- Menu items will be loaded here -->
+                </div>
+
+                <!-- Popular Items -->
+                <div class="section-header">
+                    <h2 class="section-title">Popular items</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <div id="popularGrid" class="menu-grid">
+                    <!-- Popular items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Right Side - Cart -->
+            <div class="cart-sidebar">
+                <div class="cart-header">
+                    <div>
+                        <div class="cart-title">Current Order</div>
+                        <div class="order-tag">Orders #Table1</div>
+                    </div>
+                    <button class="add-btn">+</button>
+                </div>
+
+                <div id="cartItems" class="cart-items">
+                    <!-- Cart items will be loaded here -->
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Discount</span>
+                        <span id="discount">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Sub Total</span>
+                        <span id="subtotal">GHS 0</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="total">GHS 0</span>
+                    </div>
+                </div>
+
+                <button class="checkout-btn" onclick="proceedToCheckout()">
+                    🛒 Proceed to Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Item Details Modal -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content" id="modalItemDetails">
+            <!-- Modal content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/promo.js"></script>
+</body>
+</html>

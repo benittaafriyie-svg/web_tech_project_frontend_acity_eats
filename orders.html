@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - ACITY EATS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="images/Academic-City.png" alt="Academic City University Logo" class="acity-logo">
+                ACITY EATS
+            </div>
+            <div class="header-icons">
+                <button class="icon-btn" onclick="window.location.href='index.html'">Home</button>
+                <button class="icon-btn" onclick="refreshOrders()">Refresh</button>
+                <button class="icon-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div style="padding: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div>
+                    <h1 style="font-size: 32px; color: var(--dark-color); margin-bottom: 6px;">My Orders</h1>
+                    <p style="color: #777; font-size: 14px; max-width: 480px;">
+                        This page shows your <strong>full order history</strong> and the
+                        <strong>current status</strong> of each order (Pending, Preparing, Ready, Completed).
+                    </p>
+                </div>
+                <button class="checkout-btn" onclick="window.location.href='index.html'" 
+                        style="width: auto; padding: 12px 24px;">
+                    + New Order
+                </button>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button class="tab active" onclick="filterOrders('All')">All Orders</button>
+                <button class="tab" onclick="filterOrders('Pending')">Pending</button>
+                <button class="tab" onclick="filterOrders('Preparing')">Preparing</button>
+                <button class="tab" onclick="filterOrders('Ready')">Ready</button>
+                <button class="tab" onclick="filterOrders('Completed')">Completed</button>
+            </div>
+
+            <!-- Orders Container -->
+            <div id="ordersContainer">
+                <!-- Orders will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

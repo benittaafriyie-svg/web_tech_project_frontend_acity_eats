@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - ACITY EATS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="img/acity-logo.png" alt="Academic City University Logo" class="acity-logo">
+                ACITY EATS
+            </div>
+            <div class="header-icons">
+                <button class="icon-btn" onclick="window.location.href='index.html'">Home</button>
+                <button class="icon-btn" onclick="window.location.href='orders.html'">My Orders</button>
+                <button class="icon-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Cart Page Content -->
+        <div style="padding: 30px; max-width: 1000px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h1 style="font-size: 32px; color: var(--dark-color);">🛒 Shopping Cart</h1>
+                <button class="form-btn" onclick="clearCart()" 
+                        style="background: var(--danger-color); width: auto; padding: 12px 24px;">
+                    Clear Cart
+                </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 30px;">
+                <!-- Cart Items -->
+                <div>
+                    <div id="cartItemsList" class="cart-items">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                    
+                    <button class="checkout-btn" onclick="window.location.href='index.html'" 
+                            style="margin-top: 20px; background: white; color: var(--primary-color); border: 2px solid var(--primary-color);">
+                        ← Continue Shopping
+                    </button>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-sidebar">
+                    <h2 style="margin-bottom: 20px; color: var(--dark-color);">Order Summary</h2>
+                    
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Discount</span>
+                            <span id="cartDiscount">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery Fee</span>
+                            <span style="color: var(--success-color);">FREE</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal">GHS 0</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Total</span>
+                            <span id="cartTotal">GHS 0</span>
+                        </div>
+                    </div>
+
+                    <div style="margin: 20px 0; padding: 15px; background: var(--light-bg); border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <span style="font-size: 20px;">🎉</span>
+                            <span style="font-weight: 600; color: var(--dark-color);">Promo Code</span>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" class="form-input" placeholder="Enter code" id="promoCode" style="margin: 0;">
+                            <button class="form-btn" style="width: auto; padding: 12px 20px;">Apply</button>
+                        </div>
+                    </div>
+
+                    <button class="checkout-btn" onclick="proceedToCheckout()">
+                        Proceed to Checkout
+                    </button>
+
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 12px; font-size: 14px; color: #666;">
+                        <div style="display: flex; align-items: start; gap: 10px; margin-bottom: 8px;">
+                            <span>✓</span>
+                            <span>Free delivery on all orders</span>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 10px; margin-bottom: 8px;">
+                            <span>✓</span>
+                            <span>Secure payment processing</span>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 10px;">
+                            <span>✓</span>
+                            <span>Fresh food guaranteed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/api.js"></script>
+    
+    <script>
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            displayFullCart();
+        });
+
+        // Display cart with full details
+        function displayFullCart() {
+            const cartItemsList = document.getElementById('cartItemsList');
+            const subtotalElement = document.getElementById('cartSubtotal');
+            const totalElement = document.getElementById('cartTotal');
+            
+            cartItemsList.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div style="text-align: center; padding: 80px 20px;">
+                        <div style="font-size: 64px; margin-bottom: 20px;">🛒</div>
+                        <h3 style="color: var(--dark-color); margin-bottom: 10px;">Your cart is empty</h3>
+                        <p style="color: #999; margin-bottom: 30px;">Add some delicious items to get started!</p>
+                        <button class="checkout-btn" onclick="window.location.href='index.html'" 
+                                style="width: auto; padding: 15px 40px;">
+                            Browse Menu
+                        </button>
+                    </div>
+                `;
+                subtotalElement.textContent = 'GHS 0';
+                totalElement.textContent = 'GHS 0';
+                return;
+            }
+            
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const cartItemHTML = `
+                    <div class="order-card" style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; font-size: 18px; color: var(--dark-color); margin-bottom: 5px;">
+                                    ${item.name}
+                                </div>
+                                <div style="color: var(--primary-color); font-weight: 600; font-size: 16px;">
+                                    GHS ${item.price} × ${item.quantity} = GHS ${itemTotal}
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                    <span class="quantity">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                </div>
+                                <button class="icon-btn" onclick="removeFromCart(${item.id})" 
+                                        style="color: var(--danger-color); font-size: 20px;">
+                                    🗑️
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                cartItemsList.innerHTML += cartItemHTML;
+            });
+            
+            const discount = 0;
+            const total = subtotal - discount;
+            
+            subtotalElement.textContent = `GHS ${subtotal.toLocaleString()}`;
+            document.getElementById('cartDiscount').textContent = discount;
+            totalElement.textContent = `GHS ${total.toLocaleString()}`;
+        }
+
+        // Override updateQuantity to refresh full cart display
+        const originalUpdateQuantity = updateQuantity;
+        updateQuantity = function(itemId, change) {
+            originalUpdateQuantity(itemId, change);
+            displayFullCart();
+        };
+
+        // Override removeFromCart to refresh full cart display
+        const originalRemoveFromCart = removeFromCart;
+        removeFromCart = function(itemId) {
+            if (confirm('Remove this item from cart?')) {
+                originalRemoveFromCart(itemId);
+                displayFullCart();
+            }
+        };
+    </script>
+</body>
+</html>
