@@ -23,7 +23,7 @@ ACITY EATS is a comprehensive web-based food ordering system designed for Academ
 🔗 **Live URL**: [https://benittaafriyie-svg.github.io/web_tech_project_frontend_acity_eats/]
 
 ### Backend (Render)
-🔗 **API URL**: [Your Render Backend URL here]
+🔗 **API URL**: [https://web-tech-project-backend-acity-eats.onrender.com]
 - Example: `https://campus-food-ordering-backend.onrender.com`
 
 ---
